@@ -1,2 +1,2 @@
-csvkit==1.14.3
+pandas==1.4.3
 locust==0.6.1
