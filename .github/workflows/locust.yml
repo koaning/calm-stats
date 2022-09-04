@@ -3,7 +3,7 @@ name: Besiege Calmcode with Locust
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '0 */2 * * *'
+    - cron:  '0 */6 * * *'
 
 jobs:
   scheduled:
@@ -18,7 +18,7 @@ jobs:
     - name: Install Python dependencies 
       run: python -m pip install --upgrade pip; python -m pip install -r scripts/locust/requirements.txt
     - name: Fetch latest data
-      run: locust -f scripts/locust/locu.py --headless --host http://calmcode.io -u 1000 -r 50 --csv-full-history --csv locust --run-time 60s
+      run: locust -f scripts/locust/locu.py --headless --host http://calmcode.io -u 500 -r 50 --csv-full-history --csv locust --run-time 30s
     - name: Stack CSV Files
       run: python common.py stack locust_stats_history.csv datasets/locust_stats_history.csv
     - name: Remove Other Files
