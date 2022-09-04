@@ -1,4 +1,4 @@
-name: Kollekt GitHub
+name: Besiege Calmcode with Locust
 
 on:
   workflow_dispatch:
@@ -18,7 +18,11 @@ jobs:
     - name: Install Python dependencies 
       run: python -m pip install --upgrade pip; python -m pip install -r scripts/siege/requirements.txt
     - name: Fetch latest data
-      run: locust -f scripts/siege/locu.py --headless --host http://calmcode.io -u 1000 -r 50 --csv-full-history --csv out --run-time 10s
+      run: locust -f scripts/locust/locu.py --headless --host http://calmcode.io -u 1000 -r 50 --csv-full-history --csv locust --run-time 60s
+    - name: Stack CSV Files
+      run: csvstack datasets/locust_stats_history.csv locust_stats_history.csv > datasets/locust_stats_history.csv
+    - name: Remove Other Files
+      run: rm -rf *.csv
     - name: Commit and push if it changed
       run: |-
         git config user.name "Automated"
