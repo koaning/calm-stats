@@ -10,5 +10,5 @@ def stack(new: Path, old: Path):
     pd.concat([pd.read_csv(new), pd.read_csv(old)]).to_csv(old)
 
 
-if __name__ == "__main__":
-    typer.run(stack)
+
+typer.run(stack)
